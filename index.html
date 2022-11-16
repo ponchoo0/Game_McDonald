@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mac delivery</title>
+</head>
+<body align="center">
+    <img src="Image/chara.png" alt="chara" id="character" class="character">
+    <img src="Image/desk.png" alt="" class="desk" width="1000px" height="600px">
+    <img src="Image/image.png" alt="" class="bg" width="1000px" height="600px">
+    <img src="Image/nbg_screen.png" alt="" class="nbg">
+    <img src="Image/c_1.png" alt="" class="customer">
+    <img src="Image/fukidashi.png" class="fukidashi" alt="">
+    <img src="Image/hum.png" alt="" class="hamburger" id="order_0">
+    <img src="Image/mame.png" alt="" class="mame" id="order_1">
+    <img src="Image/hum.png" alt="" class="menu_0" id="menu_0">
+    <img src="Image/mame.png" alt="" class="menu_1" id="menu_1">
+    <img src="Image/yubi_0.png" alt="" class="yubi_0" id="yubi_0">
+    <img src="Image/yubi_1.png" alt="" class="yubi_1" id="yubi_1">
+    <img src="Image/co_nhat.png" alt="" class="co">
+    <img src="Image/co_hat.png" alt="" class="co" id="hat">
+    <img src="Image/order.png" alt="" class="order">
+    <div class="title_sc" id="title">
+        <img src="Image/title.png" alt="" class="title" id="title_bg">
+        <button type="button" class="start" onclick="start()" id="title_bu">ゲームスタート</button>
+    </div>
+    <div class="bar" id="bar">　　　　</div>
+    <div class="bar_bg" id="bar_bg">　　　　</div>
+</body>
+</html>
+<script>
+var c = document.getElementById('character');
+var cRect = c.getBoundingClientRect();
+var cx = c.style.left;
+var cy = c.style.top;
+var cnt = 0;
+var a = 0;
+var l = 0;
+var i = 0;
+var r_timer = setInterval(right,10000);
+var l_timer = setInterval(left,10000);
+var timer = setInterval(timer,50)
+var j = true;
+var x = 0;
+var y = 0;
+var t = 10;
+//oc = オーダーカウント
+var oc = 5;
+
+document.addEventListener('mousemove',cursor);
+document.addEventListener('mousedown',hover);
+document.addEventListener('mouseup',nhover);
+var c0 = document.getElementById("yubi_0");
+var c1 = document.getElementById("yubi_1");
+var hat = document.getElementById("hat");
+var menu_0 = document.getElementById("menu_0");
+var menu_1 = document.getElementById("menu_1");
+var order_0 = document.getElementById("order_0");
+var order_1 = document.getElementById("order_1");
+var title = document.getElementById("title_bg");
+var title_b = document.getElementById("title_bu");
+var bar = document.getElementById("bar");
+var ocTime = setInterval(order_change,10);
+var hat_j = false;
+var menu_0_j = false;
+var menu_1_j = false;
+
+function start(){
+    t = 10;
+    title.style.zIndex = 0;
+    title_b.style.zIndex = 0;
+    order_0.style.opacity = 0;
+    order_1.style.opacity = 0;
+    order();
+}
+
+function order(){
+    order_0.style.opacity = 0;
+    order_1.style.opacity = 0;
+    oc = Math.floor(Math.random()*(2 - 0) + 0);
+    if(t > 8){
+        t = 10;
+    }
+    else{
+        t += 2;        
+    }
+    if(oc == 0){
+        order_0.style.opacity = 1;
+        order_1.style.opacity = 0;
+    }
+    if(oc == 1){
+        order_0.style.opacity = 0;
+        order_1.style.opacity = 1;
+    }
+}
+// function order_change(){
+//     if(oc == 0){
+//     }
+// }
+
+function timer(){
+    if(t > 0){
+        t -= 0.05;
+        bar.style.width = t*60+"px";
+        if(t > 5){
+            bar.style.backgroundColor = '#6aff3c';
+        }
+        else if(t > 2){
+            bar.style.backgroundColor = 'orange';
+        }
+        else if(t > 0){
+            bar.style.backgroundColor = 'red';
+        }
+        else if(t <= 0){
+            bar.style.backgroundColor = 'white';
+        }
+    }
+}
+
+function cursor(){
+    c0.style.left = event.clientX-100+'px';
+    c0.style.top = event.clientY-100+'px';
+    c1.style.left = event.clientX-100+'px';
+    c1.style.top = event.clientY-100+'px';
+    x = event.clientX;
+    y = event.clientY;
+    if(hat_j == true){
+        hat.style.left = event.clientX-180+'px';
+        hat.style.top = event.clientY-100+'px';
+    }
+    else if(menu_0_j == true){
+        menu_0.style.left = event.clientX-170+'px';
+        menu_0.style.top = event.clientY-70+'px';
+    }
+    else if(menu_1_j == true){
+        menu_1.style.left = event.clientX-170+'px';
+        menu_1.style.top = event.clientY-70+'px';
+    }
+    else if(hat_j == false){
+        nhover();
+    }
+    else if(menu_0_j == false){
+        nhover();
+    }
+}
+
+function hover(){
+    //hat
+    if(x > 150 && x < 300 && y > 300 && y < 400){
+        hat_j = true;
+        c0.style.zIndex = 0;
+        c1.style.zIndex = 50;
+    }
+    //menu_0
+    else if(x > 300 && x < 480 && y > 630 && y < 780){
+        menu_0_j = true;
+        c0.style.zIndex = 0;
+        c1.style.zIndex = 50;
+    }    
+    //menu_1
+    else if(x > 480 && x < 660 && y > 630 && y < 780){
+        menu_1_j = true;
+        c0.style.zIndex = 0;
+        c1.style.zIndex = 50;
+    }    
+}
+function nhover(){
+    c0.style.zIndex = 50;
+    c1.style.zIndex = 0;
+    hat.style.left = 50+'px';
+    hat.style.top = 250+'px';
+    menu_0.style.left = 260+'px';
+    menu_0.style.top = 630+'px';
+    menu_1.style.left = 470+'px';
+    menu_1.style.top = 630+'px';
+    if(menu_0_j == true && x > 500 && x < 1030 && y < 500 && y > 100){
+        order();
+        menu_0_j = false;
+    }
+    if(menu_1_j == true && x > 500 && x < 1030 && y < 500 && y > 100){
+        order();
+        menu_1_j = false;
+    }
+    hat_j = false;
+    menu_0_j = false;
+    menu_1_j = false;
+}
+
+document.onkeydown = key;
+function key(event){
+    if(event.which == 39 && j == true && cnt < 2){
+        i = 0;
+        clearInterval(r_timer);
+        r_timer = setInterval(right,10);
+    }
+    else if(event.which == 37 && j == true && cnt > -1){
+        l = 0;
+        clearInterval(l_timer);
+        l_timer = setInterval(left,10);
+    }
+}
+
+function right(){
+    if(i < 180){
+        a += 9;
+        c.style.left = (500+a)+'px';
+        i += 9;
+        j = false;
+    }
+    else if(i == 180){
+        i = 0;
+        clearInterval(r_timer);
+        j = true;
+        cnt += 1;
+    }
+}
+
+function left(){
+    if(l < 180){
+        a -= 9;
+        c.style.left = (500+a)+'px';
+        l += 9;
+        j = false;
+    }
+    else if(l == 180){
+        l = 0;
+        clearInterval(l_timer);
+        j = true;
+        cnt -= 1;
+    }
+}
+
+function move(){
+    c.style.left =  (150*cnt+500)+'px';
+}
+
+</script>
+<style>
+    body{
+        margin: 0;
+    }
+    body:hover{
+        cursor: none;
+    }
+    .character{
+        position: absolute;
+        left: 500px;
+        width: 350px;
+        height: 400px;
+        z-index: 0;
+        top: 300px;
+    }
+    .bg{
+        width: 100%;
+        height:100%;
+        position: absolute;
+        z-index: 1;
+        left: 0px;
+    }
+    .desk{
+        position: absolute;
+        z-index: 15;
+        width: 100%;
+        height: 100%;
+        left: 0px;
+        cursor: none;
+    }
+    .nbg{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 3;
+        left: 0px;
+    }
+    .customer{
+        position: absolute;
+        z-index: 2;
+        width: 250px;
+        height: 250px;
+        top: 250px;
+    }
+    .fukidashi{
+        position: absolute;
+        z-index: 4;
+        height: 300px;
+        width: 300px;
+        left: 500px;
+    }
+    .hamburger{
+        width: 350px;
+        height: 130px;
+        z-index: 5;
+        position: absolute;
+        top: 85px;
+        left: 480px;
+        opacity: 0;
+    }
+    .mame{
+        width: 350px;
+        height: 130px;
+        z-index: 5;
+        position: absolute;
+        top: 85px;
+        left: 480px;
+        opacity: 0;
+    }
+    .yubi_0{
+        position: absolute;
+        height: 200px;
+        width: 200px;
+        z-index: 50;
+        cursor: none;
+        -webkit-user-drag: none;
+    }
+    .yubi_0:hover{
+        cursor: none;
+    }
+    .yubi_1{
+        position: absolute;
+        height: 200px;
+        width: 200px;
+        z-index: 0;
+        cursor: none;
+        -webkit-user-drag: none;
+    }
+    .yubi_1:hover{
+        cursor: none;
+    }
+    .co{
+        height: 400px;
+        width: 280px;
+        position: absolute;
+        left: 50px;
+        top: 250px;
+        z-index: 10;
+    }
+    .menu_0{
+        position: absolute;
+        z-index: 30;
+        width: 250px;
+        height: 100px;
+        left: 260px;
+        top: 630px;
+    }
+    .menu_1{
+        position: absolute;
+        z-index: 30;
+        width: 280px;
+        height: 100px;
+        left: 470px;
+        top: 630px;
+    }
+    .order{
+        position: absolute;
+        z-index: 0;
+        height: 400px;
+        width: 400px;
+        top: 50px;
+        left: 300px;
+    }
+    .time{
+        background-color: white;
+        border: 2px solid black;
+        border-radius: 10px;
+        width: 100px;
+        height: 70px;
+        position: absolute;
+        z-index: 50;
+        font-size: 50px;
+        
+    }
+    .title{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 100;
+        left: 0;
+    }
+    .title:hover{
+        cursor: auto;
+    }
+    .start{
+        background-color: rgba(255, 255, 255, 0.61);
+        border: solid 1px rgb(90, 58, 32);
+        border-radius: 20px;
+        font-size: 30px;
+        height: 90px;
+        width: 300px;
+        z-index: 101;
+        position: absolute;
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        left: 550px;
+        top: 500px;
+    }
+    .start:hover{
+        background-color: rgba(255, 255, 255, 0.9);
+        cursor: pointer;
+    }
+    .bar{
+        width: 600px;
+        height: 25px;
+        border: solid white 10px;
+        border-radius: 10px;
+        background-color: rgb(162, 208, 249);
+        position: absolute;
+        z-index: 60;
+        left: 400px;
+        top: 20px;
+    }
+    .bar_bg{
+        width: 600px;
+        height: 25px;
+        border: solid white 10px;
+        border-radius: 10px;
+        background-color: white;
+        position: absolute;
+        z-index: 59;
+        left: 400px;
+        top: 20px;
+        color: #6aff3c;
+    }
+</style>
