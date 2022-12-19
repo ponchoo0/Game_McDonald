@@ -71,7 +71,7 @@ var oc = 5;
 //life = ライフ（体力）
 var life = 3;
 var score = 0;
-var hscore = 0;
+var hscore = 104360;
 //Zoom for Google Chrome 133%
 
 var life_0 = document.getElementById("life_0");
@@ -245,6 +245,8 @@ function timer(){
         gameclear.style.zIndex = 100;
         re_score.innerHTML = score;
         re_score.style.zIndex = 101;
+        re_hscore.style.zIndex = 101;
+        re_hscore.innerHTML = 4520;
         if(hscore <= score){
             re_hscore.innerHTML = score;
             re_hscore.style.zIndex = 100;
@@ -394,6 +396,8 @@ function miss(){
                 gameover.style.zIndex = 100;
                 re_score.innerHTML = score;
                 re_score.style.zIndex = 101;
+                re_hscore.innerHTML = 4520;
+                re_hscore.style.zIndex = 101;
                 start = false;
             }
             else if(life == 2){
@@ -763,14 +767,14 @@ function miss(){
         height: 150px;
         left: 900px;
         top: 150px;
-        border: solid 2px rgb(199, 199, 199);
-        background-color: #3dc236;
+        background-color: #5dcc57;
         z-index: 0;
         color: white;
         position: absolute;
         border-radius: 20px;
         font-size: 50px;
-        -webkit-text-stroke: rgb(137, 137, 137) 1px;
+        border: solid 2px rgb(255, 255, 255);
+        -webkit-text-stroke: rgb(0, 0, 0) 1px;
 
     }
     .normal_b{
@@ -778,14 +782,14 @@ function miss(){
         height: 150px;
         left: 900px;
         top: 350px;
-        border: solid 2px rgb(199, 199, 199);
+        border: solid 2px rgb(255, 255, 255);
+        -webkit-text-stroke: rgb(0, 0, 0) 1px;
         background-color: #f0f01d;
         z-index: 0;
         color: white;
         position: absolute;
         border-radius: 20px;
         font-size: 50px;
-        -webkit-text-stroke: rgb(137, 137, 137) 1px;
 
     }
     .hard_b{
@@ -793,14 +797,15 @@ function miss(){
         height: 150px;
         left: 900px;
         top: 550px;
-        border: solid 2px rgb(199, 199, 199);
+        border: solid 2px rgb(255, 255, 255);
+        -webkit-text-stroke: rgb(0, 0, 0) 1px;
+
         background-color: #dd482e;
         z-index: 0;
         color: white;
         position: absolute;
         border-radius: 20px;
         font-size: 50px;
-        -webkit-text-stroke: rgb(137, 137, 137) 1px;
         font-family:'メイリオ';
     }
     .easy_b:hover{
