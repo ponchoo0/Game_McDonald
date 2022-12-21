@@ -71,7 +71,7 @@ var oc = 5;
 //life = ライフ（体力）
 var life = 3;
 var score = 0;
-var hscore = 104360;
+var hscore = 0;
 //Zoom for Google Chrome 133%
 
 var life_0 = document.getElementById("life_0");
@@ -246,7 +246,6 @@ function timer(){
         re_score.innerHTML = score;
         re_score.style.zIndex = 101;
         re_hscore.style.zIndex = 101;
-        re_hscore.innerHTML = 4520;
         if(hscore <= score){
             re_hscore.innerHTML = score;
             re_hscore.style.zIndex = 100;
@@ -396,7 +395,6 @@ function miss(){
                 gameover.style.zIndex = 100;
                 re_score.innerHTML = score;
                 re_score.style.zIndex = 101;
-                re_hscore.innerHTML = 4520;
                 re_hscore.style.zIndex = 101;
                 start = false;
             }
